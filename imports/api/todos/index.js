@@ -1,2 +1,3 @@
-import './collection'
-import './expose'
+import './collection';
+import './expose';
+import './methods';
