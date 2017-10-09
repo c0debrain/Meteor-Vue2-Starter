@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <b-table class="my-table" striped hover :busy="isBusy" :fields="fields" :items="items">
+                <b-table class="my-table" striped hover :busy="!todos.$ready" :fields="fields" :items="todos">
                     <template slot="createdAt" scope="item">
                         {{moment(item.item.createdAt).format('DD/MM/YYYY hh:mm:ss')}}
                     </template>
@@ -31,7 +31,6 @@ export default {
     name: 'Home',
     data(){
     	return {
-    		isBusy: true,
             form: {
     			todo: null
             },
@@ -48,8 +47,7 @@ export default {
                 actions: {
     				label: 'Actions'
                 }
-            },
-            items: []
+            }
         }
     },
     methods: {
@@ -65,17 +63,6 @@ export default {
         onRemoveClick(_id){
 //    	    console.log(_id)
     		remove.call({_id: _id})
-        }
-    },
-    watch: {
-    	todos: {
-		    handler(todos){
-		    	this.isBusy = !this.ready;
-    			if(todos.ready){
-    				this.items = todos.data
-                }
-            },
-		    deep:true
         }
     },
 	grapher: {
